@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+<<<<<<< HEAD
 # a bash script to set  your web servers for  deployment of project web_static
 
 echo -e "\e[1;35m START CONFIGURATION\e[0m\n"
@@ -46,3 +47,28 @@ sudo service nginx restart
 echo -e "\e[1;35m Nginx service restarted\e[0m\n"
 
 echo -e "\e[1;35m END CONFIGURATION\e[0m\n"
+=======
+# sets up my web servers for the deployment of web_static
+
+sudo apt-get update
+sudo apt-get install -y nginx
+
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
+
+echo "<html>
+  <head>
+  </head>
+  <body>
+    Holberton School
+  </body>
+</html>" >> /data/web_static/releases/test/index.html
+
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+
+sudo chown -R ubuntu:ubuntu /data/
+
+sudo sed -i "26i \\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n" /etc/nginx/sites-available/default
+
+sudo service nginx restart
+>>>>>>> c6af4e57b31bb2a256d83b6c36a7b9dc90764ea2
